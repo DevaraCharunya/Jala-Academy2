@@ -1,0 +1,153 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Details</title>
+    <style>
+        /* General Styles */
+body {
+    font-family: 'Verdana', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f4f8;
+    color: #333;
+}
+
+/* Page Header */
+h1 {
+    background-color: #28a745;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin: 0;
+    font-size: 28px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Table Styles */
+table {
+    width: 80%;
+    margin: 30px auto;
+    border-collapse: collapse;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+table td {
+    padding: 15px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+    font-size: 18px;
+    color: #555;
+}
+
+/* Remove border from last row */
+table tr:last-child td {
+    border-bottom: none;
+}
+
+/* Link Styles */
+.mentor-item a {
+    text-decoration: none;
+    color: #28a745;
+    font-weight: bold;
+    font-size: 20px;
+    transition: color 0.3s ease;
+}
+
+.mentor-item a:hover {
+    color: #1e7e34;
+    text-decoration: underline;
+}
+
+/* Hover effect for rows */
+table tr:hover td {
+    background-color: #e9f5e9;
+}
+
+/* Media Query for Responsiveness */
+@media (max-width: 768px) {
+    table {
+        width: 95%;
+    }
+
+    table td {
+        font-size: 16px;
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 24px;
+        padding: 15px;
+    }
+}
+
+    </style>
+    <link rel="stylesheet" href="{% static 'css/s.css' %}">
+</head>
+<body>
+    <h1>Student</h1>
+
+    
+
+    <table style="width:100%">
+
+        {% for student in students %}
+        
+        <tr>
+            <td  class="mentor-item" >
+                <a href="{% url 'student_details' student.id %}">{{ student.name }}</a>
+                
+            </td>
+            
+        </tr>
+        {%endfor%}
+
+    </table>
+   
+    <script>
+        // Wait for the DOM content to be fully loaded
+        document.addEventListener('DOMContentLoaded', function () {
+    
+            // Smooth scroll for all anchor tags on the page
+            const links = document.querySelectorAll('a');
+            links.forEach(link => {
+                link.addEventListener('click', function(event) {
+                    event.preventDefault();  // Prevent the default action (navigation)
+                    
+                    const target = this.getAttribute('href');  // Get the link target
+                    
+                    // Scroll smoothly to the target section (if it's an internal link)
+                    if (target.startsWith('#')) {
+                        const targetElement = document.querySelector(target);
+                        window.scrollTo({
+                            top: targetElement.offsetTop,
+                            behavior: 'smooth'
+                        });
+                    } else {
+                        // For external or anchor links, let the browser handle it
+                        window.location.href = target;
+                    }
+                });
+            });
+    
+            // Add hover effect for rows (already styled in CSS, but JS can handle interaction)
+            const rows = document.querySelectorAll('table tr');
+            rows.forEach(row => {
+                row.addEventListener('mouseenter', function() {
+                    this.style.backgroundColor = '#e9f5e9'; // Change background on hover
+                });
+    
+                row.addEventListener('mouseleave', function() {
+                    this.style.backgroundColor = ''; // Reset background on hover out
+                });
+            });
+    
+        });
+    </script>
+    
+</body>
+</html>

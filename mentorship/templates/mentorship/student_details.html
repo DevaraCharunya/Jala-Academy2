@@ -1,0 +1,127 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ student.name }} - Details</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f9fc;
+            color: #333;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .container h1 {
+            background-color: #007BFF;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            border-radius: 5px;
+        }
+
+        .container p {
+            font-size: 18px;
+            line-height: 1.6;
+            margin: 10px 0;
+        }
+
+        .container p strong {
+            color: #007BFF;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 15px;
+            background-color: #007BFF;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Student Details</h1>
+        <p><strong>Name:</strong> {{ student.name }}</p>
+        <p><strong>Email:</strong> {{ student.email }}</p>
+        <p><strong>Mentor:</strong> {{ student.mentor.name }}</p>
+        <p><strong>Phone:</strong> {{ student.phone }}</p>
+
+
+        <h2>Enrollment Details</h2>
+        <div class="enrollment-details">
+            {% if enrollments %}
+                <ul>
+                    {% for enrollment in enrollments %}
+                        <li>
+                            <p><strong>Course:</strong> {{ enrollment.course.name }}</p>
+                            <p><strong>Status:</strong> {{ enrollment.get_status_display }}</p>
+                            <p><strong>Enrollment Date:</strong> {{ enrollment.enrollment_date }}</p>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No enrollments found for this student.</p>
+            {% endif %}
+        
+        <a href="{% url 'student' %}" class="back-button" id="back-button">Back</a>
+    </div>
+
+    
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Smooth scroll to top before navigating back
+            const backButton = document.getElementById('back-button');
+            if (backButton) {
+                backButton.addEventListener('click', function (event) {
+                    event.preventDefault(); // Prevent default action
+                    const backURL = this.href; // Get the URL to navigate to
+
+                    // Smooth scroll to the top
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+
+                    // Wait for the scroll to finish before navigating back
+                    setTimeout(() => {
+                        window.location.href = backURL; // Navigate to the back URL
+                    }, 500);
+                });
+            }
+
+            // Highlight text on hover
+            const highlightElements = document.querySelectorAll('.container p strong');
+            highlightElements.forEach(function (element) {
+                element.addEventListener('mouseover', function () {
+                    this.style.color = '#FF5733'; // Change to a highlight color
+                    this.style.transition = 'color 0.3s ease';
+                });
+                element.addEventListener('mouseout', function () {
+                    this.style.color = '#007BFF'; // Revert back to original color
+                });
+            });
+        });
+    </script>
+</body>
+</html>

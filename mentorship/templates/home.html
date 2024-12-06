@@ -1,0 +1,113 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>JALA ACADEMY</title>
+    <style>
+        header img {
+    height: 80px;
+    margin-left: 40px;
+}
+body {
+    /* height: 125vh;
+    background-image: url('https://jalaacademy.com/assets/images/logo.png');
+    background-size: cover;
+    font-family: sans-serif; 
+    background-color: bisque;
+    margin-top: 10px;
+    padding: 10px; */
+
+    margin: 100; /* Remove default margin */
+    padding: 100; /* Remove default padding */
+    background-image: url('https://flyclipart.com/thumb2/mentor-40084.png');
+    background-size: cover; /* Makes the image cover the entire screen */
+    background-position: center; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+    height: 100vh; /* Ensures it covers the viewport height */
+    width: 50vw; /* Ensures it covers the viewport width */
+}
+
+main {
+    color: white;
+}
+
+header {
+    background-color: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 0 25px 0 black;
+}
+
+header * {
+    display: inline;
+}
+
+header li {
+    margin: 20px;
+}
+
+header li a {
+    color: black;
+    text-decoration: none;
+}
+
+/* Alert Box Styling */
+.alert {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+        </style>
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+</head>
+<body>
+    <header>
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_P781wG_r1czftSbL6Ffr3j1-klbhqDJGkg&s">
+         <nav>
+  
+             <ul>
+                 <li><a href="{% url 'mentor' %}"> Mentors</a></li>
+                 <li><a href="{% url 'student' %}">Students</a></li>
+                 <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+                 <li><a href="/admin/">Admin Panel</a></li>
+
+                 
+                 
+             </ul>
+  
+             
+             <h1>Welcome to the  JALA ACADEMY Mentor-Student Portal</h1>
+  
+         </nav>
+     </header>
+     
+    
+<script>
+    document.querySelectorAll('a').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            // Only smooth scroll if the link is internal (i.e., starts with '#')
+            if (this.getAttribute('href').startsWith('#')) {
+                e.preventDefault();
+    
+                const targetId = this.getAttribute('href').substring(1); // Get the target element ID
+                const targetElement = document.getElementById(targetId);
+    
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            }
+        });
+    });
+</script>  
+    
+</body>
+</html>

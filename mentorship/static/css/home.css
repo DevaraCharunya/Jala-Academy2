@@ -1,0 +1,99 @@
+
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    line-height: 1.6;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 20px;
+}
+
+/* Container for Links */
+.container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Links styling */
+a {
+    display: inline-block;
+    text-decoration: none;
+    background-color: #3498db;
+    color: white;
+    padding: 15px 30px;
+    margin: 10px 0;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+a:hover {
+    background-color: #2980b9;
+    transform: scale(1.05);
+}
+
+a:active {
+    background-color: #1f5f77;
+}
+
+/* Footer styling */
+footer {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 14px;
+    color: #7f8c8d;
+}
+
+/* Alert styles */
+@keyframes fadeInAlert {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+.alert {
+    display: none;
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 20px;
+    background-color: #e74c3c;
+    color: white;
+    border-radius: 5px;
+    animation: fadeInAlert 0.5s ease;
+}
+
+.alert.show {
+    display: block;
+}
+
+/* Mobile responsiveness */
+@media screen and (max-width: 600px) {
+    a {
+        padding: 12px 25px;
+        font-size: 14px;
+    }
+
+    h1 {
+        font-size: 1.5em;
+    }
+}
+
+/* Alert Box Styling */
+.alert {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+

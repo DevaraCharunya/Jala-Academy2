@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f7f9fc;
+            color: #333;
+        }
+
+        h1 {
+            color: #007BFF;
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        table th, table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        table th {
+            background-color: #007BFF;
+            color: white;
+        }
+
+        /* CSS classes for different student statuses */
+        .ongoing {
+            background-color: #f9f9c5; /* Light yellow for ongoing */
+        }
+
+        .completed {
+            background-color: #c5f9c5; /* Light green for completed */
+        }
+
+        .stopped {
+            background-color: #f9c5c5; /* Light red for stopped */
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Dashboard</h1>
+   
+    <p>Total Students: {{ student_count }}</p>
+    <p>Total Mentors: {{ mentor_count }}</p>
+
+    <h2>Student Enrollments</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Student Name</th>
+                <th>Mentor Name</th>
+                <th>Course Name</th>
+                <th>Status</th>
+                <th>Status Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for enrollment in student_enrollments %}
+                <!-- Add Debugging: Print status value here -->
+                <tr class="{{ enrollment.status|lower }}">
+                    <td>{{ enrollment.student.name }}</td>
+                    <td>{{ enrollment.student.mentor.name }}</td> <!-- Access mentor via student -->
+                    <td>{{ enrollment.course.name }}</td>
+                    <td>{{ enrollment.get_status_display }}</td>
+                    <td>{{ enrollment.status_description }}</td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="5">No enrollments available.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>Statistics</h2>
+    <p>Ongoing Students: {{ ongoing_students.count }}</p>
+    <p>Completed Students: {{ completed_students.count }}</p>
+    <p>Stopped Students: {{ stopped_students.count }}</p>
+</body>
+</html>
