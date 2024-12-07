@@ -76,8 +76,12 @@ WSGI_APPLICATION = 'MentorStudentApp.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',  # Name from your Supabase DB
+        'USER': 'postgres.fbmgsakumlduvczrvexq',  # User from your Supabase DB
+        'PASSWORD': 'Dakrcm@5',  # Your Supabase password
+        'HOST': 'aws-0-ap-south-1.pooler.supabase.com',  # Host from your Supabase DB
+        'PORT': '6543',  # Port from your Supabase DB
     }
 }
 
